@@ -122,7 +122,8 @@ var loginInput = document.querySelector('#login-form input');
 var loginButton = document.querySelector('#login-form button');
 
 function onLoginBtnClick() {
-  console.log('hello', loginInput.value);
+  var username = loginInput.value;
+  console.log(username);
 }
 
 loginButton.addEventListener('click', onLoginBtnClick);
@@ -154,7 +155,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49402" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49536" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
