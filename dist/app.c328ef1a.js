@@ -120,13 +120,33 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 })({"app.js":[function(require,module,exports) {
 var loginForm = document.querySelector('#login-form');
 var loginInput = document.querySelector('#login-form input');
+var greeting = document.querySelector('#greeting');
+var HIDDEN_CLASSNAME = 'hidden';
+var USERNAME_KEY = 'username';
 
 function onLoginSubmit(event) {
   event.preventDefault();
-  console.log(event);
+  loginForm.classList.add(HIDDEN_CLASSNAME);
+  var username = loginInput.value;
+  localStorage.setItem(USERNAME_KEY, username);
+  paintGreetings(username);
 }
 
-loginForm.addEventListener('submit', onLoginSubmit);
+function paintGreetings(username) {
+  greeting.innerText = "Hello ".concat(username);
+  greeting.classList.remove(HIDDEN_CLASSNAME);
+}
+
+var saveUsername = localStorage.getItem(USERNAME_KEY);
+
+if (saveUsername === null) {
+  // form 을 보여주도록 하자
+  loginForm.classList.remove(HIDDEN_CLASSNAME);
+  loginForm.addEventListener('submit', onLoginSubmit);
+} else {
+  // 그 외의 경우에는 greeting 을 보여주도록 하자
+  paintGreetings(saveUsername);
+}
 },{}],"../../../.nvm/versions/node/v17.5.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -155,7 +175,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58021" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52801" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
